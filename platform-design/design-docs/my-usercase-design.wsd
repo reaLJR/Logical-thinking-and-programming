@@ -1,0 +1,106 @@
+@startuml 用例图设计
+
+left to right direction
+
+actor "教师" as teacher
+actor "学生" as student
+actor "助教" as assistant
+actor "研究人员" as expert
+
+rectangle "用户信息" {
+    usecase (注册) as signUp
+    usecase (登录) as signIn
+    usecase (管理个人资料) as manageInfo
+    usecase (管理用户) as manageAccount
+}
+
+rectangle "操作指南" {
+    usecase (查看使用指南) as viewGuide
+    usecase (浏览帮助社区) as viewHelpCommunity
+    usecase (询问操作帮助) as askRobot    
+}
+
+rectangle "编码运行" {
+    usecase (使用ASP进行编程) as viaAsp
+
+    usecase (使用逻辑进行推理) as viaLogic
+
+    usecase (自然语言转换为CNL逻辑) as viaNl
+
+    usecase (查看运行结果) as checkResult
+}
+
+rectangle "案例操作" {
+    usecase (查看案例) as viewCase
+    usecase (选择案例) as pickCase
+    usecase (提交案例解答) as submitCaseSolution
+    usecase (查看案例结果) as checkCaseResult
+}
+
+rectangle "案例库操作" {
+    usecase (案例修改) as editCase
+    usecase (审核案例修改) as checkEdit
+}
+
+rectangle "平台管理" {
+    usecase (用户反馈) as feedback
+    usecase (回应反馈) as responseFeedback
+    usecase (监控/统计案例完成情况) as monitor
+}
+
+usecase (注册) as signUp
+usecase (登录) as signIn
+usecase (管理个人资料) as manageInfo
+usecase (管理用户) as manageAccount
+
+usecase (查看使用指南) as viewGuide
+usecase (浏览帮助社区) as viewHelpCommunity
+usecase (询问操作帮助) as askRobot    
+
+usecase (使用ASP进行编程) as viaAsp
+
+usecase (使用逻辑进行推理) as viaLogic
+
+usecase (自然语言转换为CNL逻辑) as viaNl
+
+usecase (查看运行结果) as checkResult
+
+usecase (查看案例) as viewCase
+usecase (选择案例) as pickCase
+usecase (提交案例解答) as submitSolution
+usecase (查看案例结果) as checkResult
+
+usecase (案例修改) as editCase
+usecase (审核案例修改) as checkEdit
+
+usecase (用户反馈) as feedback
+usecase (回应反馈) as responseFeedback
+usecase (监控/统计案例完成情况) as monitor
+
+' 用户信息
+teacher -- signUp
+teacher -- signIn
+teacher -- manageInfo
+teacher -- manageAccount
+
+student -- signUp
+student -- signIn
+student -- manageInfo
+
+assistant -- signUp
+assistant -- signIn
+assistant -- manageInfo
+assistant -- manageAccount
+
+expert -- signUp
+expert -- signIn
+expert -- manageInfo
+
+teacher -- viewGuide
+teacher -- viewHelpCommunity
+teacher -- askRobot
+
+
+@enduml
+
+
