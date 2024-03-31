@@ -1,4 +1,7 @@
 @startuml 用例图设计
+title "用例图总览"
+
+' skinparam linetype polyline
 
 left to right direction
 
@@ -10,6 +13,7 @@ actor "研究人员" as expert
 rectangle "用户信息" {
     usecase (注册) as signUp
     usecase (登录) as signIn
+    usecase (登出) as signOut
     usecase (管理个人资料) as manageInfo
     usecase (管理用户) as manageAccount
 }
@@ -17,7 +21,8 @@ rectangle "用户信息" {
 rectangle "操作指南" {
     usecase (查看使用指南) as viewGuide
     usecase (浏览帮助社区) as viewHelpCommunity
-    usecase (询问操作帮助) as askRobot    
+    usecase (在帮助社区中发布内容) as communicateHelpCommunity
+    usecase (询问问答机器人) as askRobot    
 }
 
 rectangle "编码运行" {
@@ -25,82 +30,491 @@ rectangle "编码运行" {
 
     usecase (使用逻辑进行推理) as viaLogic
 
-    usecase (自然语言转换为CNL逻辑) as viaNl
+    usecase (自然语言转换为逻辑语句) as viaNl
+
+    usecase (输入逻辑问题生成逻辑表达) as questionAutoTransfer
 
     usecase (查看运行结果) as checkResult
 }
 
 rectangle "案例操作" {
     usecase (查看案例) as viewCase
-    usecase (选择案例) as pickCase
+    usecase (编写案例解答) as solveCase
     usecase (提交案例解答) as submitCaseSolution
-    usecase (查看案例结果) as checkCaseResult
+    usecase (查看解答结果) as checkCaseResult
+    usecase (查看案例ASP表示) as caseAsp
+    usecase (查看案例逻辑表示) as caseLogic
+
+    usecase (查看案例解析) as viewCaseAnalysis
+    usecase (浏览案例论坛) as viewCaseCommunity
+    usecase (在案例论坛中发布内容) as communicateCaseCommunity
+    usecase (编辑案例笔记) as writeCaseNotes
+    usecase (查看案例完成统计) as checkCaseStatistics
+    usecase (案例反馈) as caseFeedback
 }
 
 rectangle "案例库操作" {
-    usecase (案例修改) as editCase
-    usecase (审核案例修改) as checkEdit
+    usecase (新增案例) as addCase
+    usecase (修改案例) as editCase
+    usecase (审核案例修改) as checkCaseEdit
 }
 
 rectangle "平台管理" {
-    usecase (用户反馈) as feedback
-    usecase (回应反馈) as responseFeedback
-    usecase (监控/统计案例完成情况) as monitor
+    usecase (管理案例反馈) as manageFeedback
+    usecase (监控/统计案例完成情况) as monitorCases
 }
 
 usecase (注册) as signUp
 usecase (登录) as signIn
+usecase (登出) as signOut
 usecase (管理个人资料) as manageInfo
 usecase (管理用户) as manageAccount
 
+
 usecase (查看使用指南) as viewGuide
 usecase (浏览帮助社区) as viewHelpCommunity
-usecase (询问操作帮助) as askRobot    
+usecase (在帮助社区中发布内容) as communicateHelpCommunity
+usecase (询问问答机器人) as askRobot   
 
 usecase (使用ASP进行编程) as viaAsp
 
 usecase (使用逻辑进行推理) as viaLogic
 
-usecase (自然语言转换为CNL逻辑) as viaNl
+usecase (自然语言转换为逻辑语句) as viaNl
+
+usecase (输入逻辑问题生成逻辑表达) as questionAutoTransfer
 
 usecase (查看运行结果) as checkResult
 
 usecase (查看案例) as viewCase
-usecase (选择案例) as pickCase
-usecase (提交案例解答) as submitSolution
-usecase (查看案例结果) as checkResult
+usecase (编写案例解答) as solveCase
+usecase (提交案例解答) as submitCaseSolution
+usecase (查看解答结果) as checkCaseResult
+usecase (查看案例ASP表示) as caseAsp
+usecase (查看案例逻辑表示) as caseLogic
 
-usecase (案例修改) as editCase
-usecase (审核案例修改) as checkEdit
+usecase (查看案例解析) as viewCaseAnalysis
+usecase (浏览案例论坛) as viewCaseCommunity
+usecase (在案例论坛中发布内容) as communicateCaseCommunity
+usecase (编辑案例笔记) as writeCaseNotes
+usecase (查看案例完成统计) as checkCaseStatistics
+usecase (案例反馈) as caseFeedback
 
-usecase (用户反馈) as feedback
-usecase (回应反馈) as responseFeedback
-usecase (监控/统计案例完成情况) as monitor
+usecase (新增案例) as addCase
+usecase (修改案例) as editCase
+usecase (审核案例修改) as checkCaseEdit
+
+usecase (管理案例反馈) as manageFeedback
+usecase (监控/统计案例完成情况) as monitorCases
 
 ' 用户信息
-teacher -- signUp
-teacher -- signIn
-teacher -- manageInfo
-teacher -- manageAccount
+teacher --> signUp
+teacher --> signIn
+teacher --> signOut
+teacher --> manageInfo
+teacher --> manageAccount
 
-student -- signUp
-student -- signIn
-student -- manageInfo
+student -up-> signUp
+student -up-> signIn
+student -up-> signOut
+student -up-> manageInfo
 
-assistant -- signUp
-assistant -- signIn
-assistant -- manageInfo
-assistant -- manageAccount
 
-expert -- signUp
-expert -- signIn
-expert -- manageInfo
+assistant --> signUp
+assistant --> signIn
+assistant --> signOut
+assistant --> manageInfo
+assistant --> manageAccount
 
-teacher -- viewGuide
-teacher -- viewHelpCommunity
-teacher -- askRobot
+expert -up-> signUp
+expert -up-> signIn
+expert -up-> signOut
+expert -up-> manageInfo
+
+
+' 操作指南
+teacher --> viewGuide
+teacher --> viewHelpCommunity
+teacher --> communicateHelpCommunity
+teacher --> askRobot
+
+student -up-> viewGuide
+student -up-> viewHelpCommunity
+student -up-> communicateHelpCommunity
+student -up-> askRobot
+
+assistant --> viewGuide
+assistant --> viewHelpCommunity
+assistant --> communicateHelpCommunity
+assistant --> askRobot
+
+expert -up-> viewGuide
+expert -up-> viewHelpCommunity
+expert -up-> communicateHelpCommunity
+expert -up-> askRobot
+
+' 编码运行
+teacher --> viaAsp
+teacher --> viaLogic
+teacher --> viaNl
+teacher --> questionAutoTransfer
+teacher --> checkResult
+
+
+student -up-> viaAsp
+student -up-> viaLogic
+student -up-> viaNl
+student -up-> questionAutoTransfer
+student -up-> checkResult
+
+
+assistant --> viaAsp
+assistant --> viaLogic
+assistant --> viaNl
+assistant --> questionAutoTransfer
+assistant --> checkResult
+
+
+expert -up-> viaAsp
+expert -up-> viaLogic
+expert -up-> viaNl
+expert -up-> questionAutoTransfer
+expert -up-> checkResult
+
+
+
+
+' 案例操作
+teacher --> viewCase
+teacher --> solveCase
+teacher --> submitCaseSolution
+teacher --> checkCaseResult
+teacher --> caseAsp
+teacher --> caseLogic
+
+teacher --> viewCaseAnalysis
+teacher --> viewCaseCommunity
+teacher --> communicateCaseCommunity
+teacher --> writeCaseNotes
+teacher --> checkCaseStatistics
+teacher --> caseFeedback
+
+student -up-> viewCase
+student -up-> solveCase
+student -up-> submitCaseSolution
+student -up-> checkCaseResult
+student -up-> caseAsp
+student -up-> caseLogic
+
+student -up-> viewCaseAnalysis
+student -up-> viewCaseCommunity
+student -up-> communicateCaseCommunity
+student -up-> writeCaseNotes
+student -up-> checkCaseStatistics
+student -up-> caseFeedback
+
+assistant --> viewCase
+assistant --> solveCase
+assistant --> submitCaseSolution
+assistant --> checkCaseResult
+assistant --> caseAsp
+assistant --> caseLogic
+
+assistant --> viewCaseAnalysis
+assistant --> viewCaseCommunity
+assistant --> communicateCaseCommunity
+assistant --> writeCaseNotes
+assistant --> checkCaseStatistics
+assistant --> caseFeedback
+
+expert -up-> viewCase
+expert -up-> solveCase
+expert -up-> submitCaseSolution
+expert -up-> checkCaseResult
+expert -up-> caseAsp
+expert -up-> caseLogic
+
+expert -up-> viewCaseAnalysis
+expert -up-> viewCaseCommunity
+expert -up-> communicateCaseCommunity
+expert -up-> writeCaseNotes
+expert -up-> checkCaseStatistics
+expert -up-> caseFeedback
+
+' 案例库操作
+teacher --> addCase
+teacher --> editCase
+teacher --> checkCaseEdit
+
+student -up-> addCase
+student -up-> editCase
+
+assistant --> addCase
+assistant --> editCase
+assistant --> checkCaseEdit
+
+expert -up-> addCase
+expert -up-> editCase
+expert -up-> checkCaseEdit
+
+
+' 平台管理
+teacher --> manageFeedback
+teacher --> monitorCases
+
+assistant --> manageFeedback
+assistant --> monitorCases
+
+expert -up-> monitorCases
+@enduml
+
+@startuml 角色概览
+title "角色概览"
+
+left to right direction
+
+actor "教师" as teacher
+actor "学生" as student
+actor "助教" as assistant
+actor "研究人员" as expert
+@enduml
+
+@startuml 用例概览
+title "用例总览"
+
+rectangle "用户信息" {
+    usecase (注册) as signUp
+    usecase (登录) as signIn
+    usecase (登出) as signOut
+    usecase (管理个人资料) as manageInfo
+    usecase (管理用户) as manageAccount
+}
+
+rectangle "操作指南" {
+    usecase (查看使用指南) as viewGuide
+    usecase (浏览帮助社区) as viewHelpCommunity
+    usecase (在帮助社区中发布内容) as communicateHelpCommunity
+    usecase (询问问答机器人) as askRobot    
+}
+
+rectangle "编码运行" {
+    usecase (使用ASP进行编程) as viaAsp
+
+    usecase (使用逻辑进行推理) as viaLogic
+
+    usecase (自然语言转换为逻辑语句) as viaNl
+
+    usecase (输入逻辑问题生成逻辑表达) as questionAutoTransfer
+
+    usecase (查看运行结果) as checkResult
+}
+
+rectangle "案例操作" {
+    usecase (查看案例) as viewCase
+    usecase (编写案例解答) as solveCase
+    usecase (提交案例解答) as submitCaseSolution
+    usecase (查看解答结果) as checkCaseResult
+    usecase (查看案例ASP表示) as caseAsp
+    usecase (查看案例逻辑表示) as caseLogic
+
+    usecase (浏览案例论坛) as viewCaseCommunity
+    usecase (在案例论坛中发布内容) as communicateCaseCommunity
+    usecase (编辑案例笔记) as writeCaseNotes
+    usecase (查看案例完成统计) as checkCaseStatistics
+    usecase (案例反馈) as caseFeedback
+}
+
+rectangle "案例库操作" {
+    usecase (新增案例) as addCase
+    usecase (修改案例) as editCase
+    usecase (审核案例修改) as checkCaseEdit
+}
+
+rectangle "平台管理" {
+    usecase (管理案例反馈) as manageFeedback
+    usecase (监控/统计案例完成情况) as monitorCases
+}
+
+@enduml
+
+@startuml 用户信息操作用例图
+title "用户信息操作用例图"
+
+left to right direction
+
+
+actor "教师/助教" as teacherAndStudent
+actor "学生/研究人员" as assistantAndExpert
+
+rectangle "用户信息" {
+    usecase (注册) as signUp
+    usecase (登录) as signIn
+    usecase (登出) as signOut
+    usecase (管理个人资料) as manageInfo
+    usecase (管理用户) as manageAccount
+}
+
+teacherAndStudent --> signUp
+teacherAndStudent --> signIn
+teacherAndStudent --> signOut
+teacherAndStudent --> manageInfo
+teacherAndStudent --> manageAccount
+
+
+
+assistantAndExpert -up-> signUp
+assistantAndExpert -up-> signIn
+assistantAndExpert -up-> signOut
+assistantAndExpert -up-> manageInfo
+@enduml
+
+@startuml 操作指南用例图
+title "操作指南用例图"
+
+left to right direction
+
+actor "教师/学生\n助教/研究人员" as person
+
+rectangle "操作指南" {
+    usecase (查看使用指南) as viewGuide
+    usecase (浏览帮助社区) as viewHelpCommunity
+    usecase (在帮助社区中发布内容) as communicateHelpCommunity
+    usecase (询问问答机器人) as askRobot    
+}
+
+person --> viewGuide
+person --> viewHelpCommunity
+person --> communicateHelpCommunity
+person --> askRobot
+
+@enduml
+
+@startuml 编码运行操作用例图
+title "编码运行操作用例图"
+
+left to right direction
+
+actor "教师/学生\n助教/研究人员" as person
+
+rectangle "编码运行" {
+    usecase (使用ASP进行编程) as viaAsp
+
+    usecase (使用逻辑进行推理) as viaLogic
+
+    usecase (自然语言转换为逻辑语句) as viaNl
+
+    usecase (输入逻辑问题生成逻辑表达) as questionAutoTransfer
+
+    usecase (查看运行结果) as checkResult
+}
+
+person --> viaAsp
+person --> viaLogic
+person --> viaNl
+person --> questionAutoTransfer
+person --> checkResult
+
+@enduml
+
+@startuml 案例操作用例图
+title "案例操作用例图"
+
+left to right direction
+
+actor "教师/学生\n助教/研究人员" as person
+
+rectangle "案例操作(核心需求)" {
+    usecase (查看案例) as viewCase
+    usecase (编写案例解答) as solveCase
+    usecase (提交案例解答) as submitCaseSolution
+    usecase (查看解答结果) as checkCaseResult
+    usecase (查看案例ASP表示) as caseAsp
+    usecase (查看案例逻辑表示) as caseLogic
+
+}
+
+rectangle "案例操作(辅助需求)" {
+    usecase (查看案例解析) as viewCaseAnalysis
+    usecase (浏览案例论坛) as viewCaseCommunity
+    usecase (在案例论坛中发布内容) as communicateCaseCommunity
+    usecase (编辑案例笔记) as writeCaseNotes
+    usecase (查看案例完成统计) as checkCaseStatistics
+    usecase (案例反馈) as caseFeedback
+}
+
+person --> viewCase
+person --> solveCase
+person --> submitCaseSolution
+person --> checkCaseResult
+person --> caseAsp
+person --> caseLogic
+
+person -up-> viewCaseAnalysis
+person -up-> viewCaseCommunity
+person -up-> communicateCaseCommunity
+person -up-> writeCaseNotes
+person -up-> checkCaseStatistics
+person -up-> caseFeedback
+
+@enduml
+
+@startuml 案例库操作用例图
+title "案例库操作用例图"
+
+left to right direction
+
+
+actor "教师/助教/研究人员" as teacherAndAssistantAndExpert
+actor "学生" as student
+
+rectangle "案例库操作" {
+    usecase (新增案例) as addCase
+    usecase (修改案例) as editCase
+    usecase (审核案例修改) as checkCaseEdit
+
+    usecase (新增案例问题) as addCaseQuestion
+    usecase (新增案例ASP表达) as addCaseAsp
+    usecase (新增案例逻辑表达) as addCaseLogic
+
+    usecase (修改案例问题) as editCaseQuestion
+    usecase (修改案例ASP表达) as editCaseAsp
+    usecase (修改案例逻辑表达) as editCaseLogic
+}
+
+teacherAndAssistantAndExpert --> addCase
+teacherAndAssistantAndExpert --> editCase
+teacherAndAssistantAndExpert --> checkCaseEdit
+
+student --> addCase
+student --> editCase
+
+addCase <|-- addCaseQuestion
+addCase <|-- addCaseAsp
+addCase <|-- addCaseLogic
+
+editCase <|-- editCaseQuestion
+editCase <|-- editCaseAsp
+editCase <|-- editCaseLogic
 
 
 @enduml
 
+@startuml 平台管理操作用例图
+title "平台管理操作用例图"
 
+left to right direction
+
+
+actor "教师/助教" as teacherAndAssistant
+actor "研究人员" as expert
+
+rectangle "平台管理" {
+    usecase (管理案例反馈) as manageFeedback
+    usecase (监控/统计案例完成情况) as monitorCases
+}
+
+teacherAndAssistant --> manageFeedback
+teacherAndAssistant --> monitorCases
+
+expert --> monitorCases
+@enduml
