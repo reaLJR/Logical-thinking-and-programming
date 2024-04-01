@@ -352,6 +352,9 @@ rectangle "用户信息" {
     usecase (登出) as signOut
     usecase (管理个人资料) as manageInfo
     usecase (管理用户) as manageAccount
+
+    usecase (设置用户权限) as setRight
+    usecase (注销账号) as closeAccount
 }
 
 teacherAndStudent --> signUp
@@ -366,6 +369,9 @@ assistantAndExpert -up-> signUp
 assistantAndExpert -up-> signIn
 assistantAndExpert -up-> signOut
 assistantAndExpert -up-> manageInfo
+
+manageAccount <|-- setRight
+manageAccount <|-- closeAccount
 @enduml
 
 @startuml 操作指南用例图
