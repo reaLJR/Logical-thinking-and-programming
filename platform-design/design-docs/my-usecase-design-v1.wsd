@@ -53,6 +53,300 @@ rectangle "案例操作" {
     usecase (案例反馈) as caseFeedback
 }
 
+rectangle "班级管理" {
+    usecase (加入班级) as joinClass
+    usecase (管理成员) as manageMember
+    usecase (布置作业) as publishHomework
+    usecase (完成作业) as finishHomework
+    usecase (导出成绩) as exportScore
+    usecase (查看个人成绩) as viewMyScore
+    usecase (查看班级成绩) as viewSccores
+    usecase (查看班级) as viewClass
+    usecase (查看作业) as viewHomework
+    usecase (作业打分) as setScore
+}
+
+rectangle "案例库操作" {
+    usecase (新增案例) as addCase
+    usecase (修改案例) as editCase
+    usecase (审核案例修改) as checkCaseEdit
+}
+
+rectangle "平台管理" {
+    usecase (管理案例反馈) as manageFeedback
+    usecase (监控/统计案例完成情况) as monitorCases
+}
+
+usecase (注册) as signUp
+usecase (登录) as signIn
+usecase (登出) as signOut
+usecase (管理个人资料) as manageInfo
+usecase (管理用户) as manageAccount
+
+
+usecase (查看使用指南) as viewGuide
+usecase (浏览帮助社区) as viewHelpCommunity
+usecase (在帮助社区中发布内容) as communicateHelpCommunity
+usecase (询问问答机器人) as askRobot   
+
+usecase (使用ASP进行编程) as viaAsp
+
+usecase (使用逻辑进行推理) as viaLogic
+
+usecase (自然语言转换为逻辑语句) as viaNl
+
+usecase (输入逻辑问题生成逻辑表达) as questionAutoTransfer
+
+usecase (查看运行结果) as checkResult
+
+usecase (查看案例) as viewCase
+usecase (编写案例解答) as solveCase
+usecase (提交案例解答) as submitCaseSolution
+usecase (查看解答结果) as checkCaseResult
+usecase (查看案例ASP表示) as caseAsp
+usecase (查看案例逻辑表示) as caseLogic
+
+usecase (加入班级) as joinClass
+usecase (管理成员) as manageMember
+usecase (布置作业) as publishHomework
+usecase (完成作业) as finishHomework
+usecase (导出成绩) as exportScore
+usecase (查看个人成绩) as viewMyScore
+usecase (查看班级成绩) as viewSccores
+usecase (查看班级) as viewClass
+usecase (查看作业) as viewHomework
+usecase (作业打分) as setScore
+
+usecase (查看案例解析) as viewCaseAnalysis
+usecase (浏览案例论坛) as viewCaseCommunity
+usecase (在案例论坛中发布内容) as communicateCaseCommunity
+usecase (编辑案例笔记) as writeCaseNotes
+usecase (查看案例完成统计) as checkCaseStatistics
+usecase (案例反馈) as caseFeedback
+
+usecase (新增案例) as addCase
+usecase (修改案例) as editCase
+usecase (审核案例修改) as checkCaseEdit
+
+usecase (管理案例反馈) as manageFeedback
+usecase (监控/统计案例完成情况) as monitorCases
+
+' 用户信息
+teacher --> signUp
+teacher --> signIn
+teacher --> signOut
+teacher --> manageInfo
+teacher --> manageAccount
+
+student -up-> signUp
+student -up-> signIn
+student -up-> signOut
+student -up-> manageInfo
+
+
+assistant --> signUp
+assistant --> signIn
+assistant --> signOut
+assistant --> manageInfo
+assistant --> manageAccount
+
+expert -up-> signUp
+expert -up-> signIn
+expert -up-> signOut
+expert -up-> manageInfo
+
+
+' 操作指南
+teacher --> viewGuide
+teacher --> viewHelpCommunity
+teacher --> communicateHelpCommunity
+teacher --> askRobot
+
+student -up-> viewGuide
+student -up-> viewHelpCommunity
+student -up-> communicateHelpCommunity
+student -up-> askRobot
+
+assistant --> viewGuide
+assistant --> viewHelpCommunity
+assistant --> communicateHelpCommunity
+assistant --> askRobot
+
+expert -up-> viewGuide
+expert -up-> viewHelpCommunity
+expert -up-> communicateHelpCommunity
+expert -up-> askRobot
+
+' 编码运行
+teacher --> viaAsp
+teacher --> viaLogic
+teacher --> viaNl
+teacher --> questionAutoTransfer
+teacher --> checkResult
+
+
+student -up-> viaAsp
+student -up-> viaLogic
+student -up-> viaNl
+student -up-> questionAutoTransfer
+student -up-> checkResult
+
+
+assistant --> viaAsp
+assistant --> viaLogic
+assistant --> viaNl
+assistant --> questionAutoTransfer
+assistant --> checkResult
+
+
+expert -up-> viaAsp
+expert -up-> viaLogic
+expert -up-> viaNl
+expert -up-> questionAutoTransfer
+expert -up-> checkResult
+
+
+
+
+' 案例操作
+teacher --> viewCase
+teacher --> solveCase
+teacher --> submitCaseSolution
+teacher --> checkCaseResult
+teacher --> caseAsp
+teacher --> caseLogic
+
+teacher --> viewCaseAnalysis
+teacher --> viewCaseCommunity
+teacher --> communicateCaseCommunity
+teacher --> writeCaseNotes
+teacher --> checkCaseStatistics
+teacher --> caseFeedback
+
+student -up-> viewCase
+student -up-> solveCase
+student -up-> submitCaseSolution
+student -up-> checkCaseResult
+student -up-> caseAsp
+student -up-> caseLogic
+
+student -up-> viewCaseAnalysis
+student -up-> viewCaseCommunity
+student -up-> communicateCaseCommunity
+student -up-> writeCaseNotes
+student -up-> checkCaseStatistics
+student -up-> caseFeedback
+
+assistant --> viewCase
+assistant --> solveCase
+assistant --> submitCaseSolution
+assistant --> checkCaseResult
+assistant --> caseAsp
+assistant --> caseLogic
+
+assistant --> viewCaseAnalysis
+assistant --> viewCaseCommunity
+assistant --> communicateCaseCommunity
+assistant --> writeCaseNotes
+assistant --> checkCaseStatistics
+assistant --> caseFeedback
+
+expert -up-> viewCase
+expert -up-> solveCase
+expert -up-> submitCaseSolution
+expert -up-> checkCaseResult
+expert -up-> caseAsp
+expert -up-> caseLogic
+
+expert -up-> viewCaseAnalysis
+expert -up-> viewCaseCommunity
+expert -up-> communicateCaseCommunity
+expert -up-> writeCaseNotes
+expert -up-> checkCaseStatistics
+expert -up-> caseFeedback
+
+' 案例库操作
+teacher --> addCase
+teacher --> editCase
+teacher --> checkCaseEdit
+
+student -up-> addCase
+student -up-> editCase
+
+assistant --> addCase
+assistant --> editCase
+assistant --> checkCaseEdit
+
+expert -up-> addCase
+expert -up-> editCase
+expert -up-> checkCaseEdit
+
+
+' 平台管理
+teacher --> manageFeedback
+teacher --> monitorCases
+
+assistant --> manageFeedback
+assistant --> monitorCases
+
+expert -up-> monitorCases
+@enduml
+
+@startuml 用例图设计(删减)
+title "用例图总览"
+
+' skinparam linetype polyline
+
+left to right direction
+
+actor "教师" as teacher
+actor "学生" as student
+actor "助教" as assistant
+actor "研究人员" as expert
+
+rectangle "用户信息" {
+    usecase (注册) as signUp
+    usecase (登录) as signIn
+    usecase (登出) as signOut
+    usecase (管理个人资料) as manageInfo
+    usecase (管理用户) as manageAccount
+}
+
+rectangle "操作指南" {
+    usecase (查看使用指南) as viewGuide
+    usecase (浏览帮助社区) as viewHelpCommunity
+    usecase (在帮助社区中发布内容) as communicateHelpCommunity
+    usecase (询问问答机器人) as askRobot    
+}
+
+rectangle "编码运行" {
+    usecase (使用ASP进行编程) as viaAsp
+
+    usecase (使用逻辑进行推理) as viaLogic
+
+    usecase (自然语言转换为逻辑语句) as viaNl
+
+    usecase (输入逻辑问题生成逻辑表达) as questionAutoTransfer
+
+    usecase (查看运行结果) as checkResult
+}
+
+rectangle "案例操作" {
+    usecase (查看案例) as viewCase
+    usecase (编写案例解答) as solveCase
+    usecase (提交案例解答) as submitCaseSolution
+    usecase (查看解答结果) as checkCaseResult
+    usecase (查看案例ASP表示) as caseAsp
+    usecase (查看案例逻辑表示) as caseLogic
+
+    usecase (查看案例解析) as viewCaseAnalysis
+    usecase (浏览案例论坛) as viewCaseCommunity
+    usecase (在案例论坛中发布内容) as communicateCaseCommunity
+    usecase (编辑案例笔记) as writeCaseNotes
+    usecase (查看案例完成统计) as checkCaseStatistics
+    usecase (案例反馈) as caseFeedback
+}
+
 rectangle "案例库操作" {
     usecase (新增案例) as addCase
     usecase (修改案例) as editCase
@@ -324,6 +618,19 @@ rectangle "案例操作" {
     usecase (案例反馈) as caseFeedback
 }
 
+rectangle "班级管理" {
+    usecase (加入班级) as joinClass
+    usecase (管理成员) as manageMember
+    usecase (布置作业) as publishHomework
+    usecase (完成作业) as finishHomework
+    usecase (导出成绩) as exportScore
+    usecase (查看个人成绩) as viewMyScore
+    usecase (查看班级成绩) as viewSccores
+    usecase (查看班级) as viewClass
+    usecase (查看作业) as viewHomework
+    usecase (作业打分) as setScore
+}
+
 rectangle "案例库操作" {
     usecase (新增案例) as addCase
     usecase (修改案例) as editCase
@@ -385,13 +692,13 @@ rectangle "操作指南" {
     usecase (查看使用指南) as viewGuide
     usecase (浏览帮助社区) as viewHelpCommunity
     usecase (在帮助社区中发布内容) as communicateHelpCommunity
-    ' usecase (询问问答机器人) as askRobot    
+     
 }
 
 person --> viewGuide
 person --> viewHelpCommunity
 person --> communicateHelpCommunity
-' person --> askRobot
+
 
 @enduml
 
