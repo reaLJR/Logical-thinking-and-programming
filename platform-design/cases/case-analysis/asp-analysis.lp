@@ -4,8 +4,6 @@ person(w).
 person(l).
 person(zhao).
 person(q).
-condition(true;false).
-
 
 p(z) :- shoot(z), not shoot(l).
 p(z) :- not shoot(z), shoot(l).

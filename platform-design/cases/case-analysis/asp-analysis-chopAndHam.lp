@@ -15,5 +15,5 @@ both(P) :- person(P), eat(P, ham, yes), eat(P, chop, tod).
 :- eat(b, chop, D), eat(c, chop, D), day(D).
 :- 0{both(P):person(P)}0.
 
-#show eat/3.
+% #show eat/3.
 #show both/1.
