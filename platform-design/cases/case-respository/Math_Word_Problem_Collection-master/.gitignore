@@ -1,0 +1,7 @@
+/datasets/
+/my_checkpoints/
+**/hide_config.py
+**/__pycache__/
+**/randomly_try*
+/wandb/
+**/mid_result/
