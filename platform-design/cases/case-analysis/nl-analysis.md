@@ -89,6 +89,8 @@
     - 若p2错误，鹿是钱将军射中的。
       - 符合条件，因此结果为鹿是钱将军射中的。此时，p4、p5正确，p1、p2、p3错误。
 
+**结论**：赵将军和钱将军的话是对的。鹿是钱将军射中的。
+
 ## ASP 表示
 ```
 person(z).
@@ -112,5 +114,67 @@ p(q) :- not shoot(l), not shoot(z).
 #show shoot/1.
 ```
 
+```
+person(z).
+person(w).
+person(l).
+person(zhao).
+person(q).
+
+rule(eitherOr).
+rule(neitherNor).
+rule(ifThen).
+rule(not_).
+rule(bothAnd).
+
+reason(X, Y, eitherOr) :-     p(X), not p(Y), X!=Y, r(X), r(Y).
+reason(X, Y, eitherOr) :- not p(X),     p(Y), X!=Y, r(X), r(Y).
+
+reason(X, Y, ifThen)   :-     p(X),     p(Y), X!=Y, r(X), r(Y).
+reason(X, Y, ifThen)   :- not p(X),           X!=Y, r(X), r(Y).
+
+reason(X, Y, bothAnd)  :-     p(X),     p(Y), X!=Y, r(X), r(Y).
+
+r(1..8).
+
+p(z) :- reason(1, 2, eitherOr).
+p(1) :- shoot(z).
+p(2) :- shoot(l).
+
+p(w) :- not shoot(q).
+
+p(l) :- reason(3, 4, ifThen).
+p(3) :- not shoot(zhao).
+p(4) :- shoot(w).
+
+p(zhao) :- reason(5, 6, bothAnd).
+p(5) :- not shoot(zhao).
+p(6) :- not shoot(w).
+
+p(q) :- reason(7, 8, bothAnd).
+p(7) :- not shoot(l).
+p(8) :- not shoot(z).
+
+1{shoot(X) : person(X)}1.
+2{p(X) : person(X)}2.
+
+#show p/1.
+#show shoot/1.
+```
+
+![alt text](image-1.png)
+
 ## AF 表示
 ![AF表示](image.png)
+
+## 总结
+- 全部谓词转化为p.
+- 要使用此模板,首先应自然语言处理,得到逻辑结构.在本题中,假设已将原题转化为CNL,
+  - 要在编程语言中将X将军的命题转化为`p(X) :- reason(a, b, type)`格式,**要表达多于两个子命题的逻辑关系,需要运用编译原理的知识**;
+  - 要将原子命题转化为`p(n) :- condition`,**如何表达condition是一个难点**;
+  - 要统计命题数量,表示为`r(1..N)`;  - 
+  - 要将某命题必须成立表示为`:- not p`;
+  - 要将"有X个命题成立"转化为`X{p}X`(难点在于p的限制条件).
+
+## 思考
+- 如何将"有X个命题成立"转化为`p(A) :- X{p}X`: 难以归纳出普遍命题,需要编译转换.

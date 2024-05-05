@@ -19,3 +19,17 @@ p3 -> p1
 @enduml
 
 
+@startuml
+
+skinparam nodesep 30
+skinparam ranksep 30
+
+circle A
+
+A --> B
+A --> C
+C --> D
+C --> E
+C --> F
+
+@enduml
