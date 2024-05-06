@@ -92,6 +92,7 @@
 **结论**：赵将军和钱将军的话是对的。鹿是钱将军射中的。
 
 ## ASP 表示
+- 易于阅读和理解,难以机械转换
 ```
 person(z).
 person(w).
@@ -114,18 +115,16 @@ p(q) :- not shoot(l), not shoot(z).
 #show shoot/1.
 ```
 
+- 添加一些基本规则,将所有命题谓词统一表示为r,相对易于转化.
 ```
-person(z).
-person(w).
-person(l).
-person(zhao).
-person(q).
-
 rule(eitherOr).
 rule(neitherNor).
 rule(ifThen).
 rule(not_).
-rule(bothAnd).
+rule(bothAnd). 
+rule(nStatementsTrue).
+rule(allStatementsTrue).
+rule(noStatementTrue).
 
 reason(X, Y, eitherOr) :-     p(X), not p(Y), X!=Y, r(X), r(Y).
 reason(X, Y, eitherOr) :- not p(X),     p(Y), X!=Y, r(X), r(Y).
@@ -135,34 +134,46 @@ reason(X, Y, ifThen)   :- not p(X),           X!=Y, r(X), r(Y).
 
 reason(X, Y, bothAnd)  :-     p(X),     p(Y), X!=Y, r(X), r(Y).
 
+% generated
+r(X) :- person(X).
 r(1..8).
+r(shootz;shootl;shootw;shootq;shootzhao).
+
+person(z).
+person(w).
+person(l).
+person(zhao).
+person(q).
 
 p(z) :- reason(1, 2, eitherOr).
-p(1) :- shoot(z).
-p(2) :- shoot(l).
+p(1) :- p(shootz).
+p(2) :- p(shootl).
 
-p(w) :- not shoot(q).
+p(w) :- not p(shootq).
 
 p(l) :- reason(3, 4, ifThen).
-p(3) :- not shoot(zhao).
-p(4) :- shoot(w).
+p(3) :- not p(shootzhao).
+p(4) :- p(shootw).
 
 p(zhao) :- reason(5, 6, bothAnd).
-p(5) :- not shoot(zhao).
-p(6) :- not shoot(w).
+p(5) :- not p(shootzhao).
+p(6) :- not p(shootw).
 
 p(q) :- reason(7, 8, bothAnd).
-p(7) :- not shoot(l).
-p(8) :- not shoot(z).
+p(7) :- not p(shootl).
+p(8) :- not p(shootz).
 
-1{shoot(X) : person(X)}1.
-2{p(X) : person(X)}2.
+p(king) :- 2{p(z);p(w);p(l);p(zhao);p(q)}2.
+1{p(shootz);p(shootl);p(shootw);p(shootq);p(shootzhao)}1.
+:- not p(king).
 
 #show p/1.
-#show shoot/1.
 ```
 
-![alt text](image-1.png)
+运行结果:
+
+<!-- ![alt text](image-1.png) -->
+![alt text](image-2.png)
 
 ## AF 表示
 ![AF表示](image.png)
