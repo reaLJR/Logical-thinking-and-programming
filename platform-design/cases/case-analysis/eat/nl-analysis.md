@@ -47,7 +47,7 @@
 因此，只有布福德才能昨天要火腿，今天要猪排。 -->
 
 ## 逻辑模式
-演绎推理
+溯因推理
 
 ## 题目来源
 MBA考试辅导逻辑分册
@@ -140,8 +140,3 @@ answer(P) :- person(P), eat(P, ham, yes), eat(P, pork, tod).
 </style>
 
 
-<pre>
-<code class="custom-code">
-这是一个自定义代码块。
-</code>
-</pre>
