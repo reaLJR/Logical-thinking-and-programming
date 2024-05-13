@@ -333,7 +333,7 @@ answer(X) :- p(X), person(X).
 
 :- not p(king).
 
-% #show answer/1.
+#show answer/1.
 #show p/1.
 % #show shoot/1.
 % #show true.
