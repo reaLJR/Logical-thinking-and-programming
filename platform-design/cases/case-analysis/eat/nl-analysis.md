@@ -62,7 +62,7 @@ MBA考试辅导逻辑分册
 - 人：阿德里安、卡特、布福德
 - 日期：昨天、今天
 - 食物：火腿、猪排
-- 每人每顿吃且只吃一种食物（隐含）
+- 每人每顿吃且只吃一种食物
 
 
 ### 任务目标
@@ -129,14 +129,8 @@ answer(P) :- person(P), eat(P, ham, yes), eat(P, pork, tod).
 
 
 ## 总结
-- 不能用统一谓词来表示逻辑类型的命题，这样只适用于耦合度为0的命题，而命题之间可能存在依赖关系(存在多个参数时，依赖关系可能很复杂)。它应该放在NL到ASP的转化程序中。
 
-<style>
-    .custom-code {
-        color: red;
-        background-color: lightgray;
-        padding: 10px;
-    }
-</style>
+
+
 
 
