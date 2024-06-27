@@ -30,7 +30,7 @@ p :- p(1), p(2), p(3).
 
 answer(P) :- person(P), eat(P, ham, yes), eat(P, pork, tod), p.
 
-#show eat/3.
-% #show p/1.
-#show p/2.
+% #show eat/3.
+% % #show p/1.
+% #show p/2.
 #show answer/1.
