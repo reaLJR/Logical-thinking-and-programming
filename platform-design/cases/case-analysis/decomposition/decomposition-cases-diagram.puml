@@ -1,0 +1,41 @@
+@startwbs chopAndHam
+' <style>
+' wbsDiagram {
+'   .notations {
+'     '   SequenceBoxBorderColor white
+'     '   BoxPadding 1
+'       BackgroundColor clear
+'       LineThickness 0
+'   }
+' }
+' </style>
+
++ answer
+++ answer(a)
++++ eat(a, ham, yes)
++++ eat(a, pork, tod)
++++ p 
+++++ p1
++++++ today
+++++++ if eat(a, ham, tod) then eat(b, pork, tod)
++++++ yesterday
+++++++ ...
+++++ p2
+++++ p3
+++ answer(b)
+++ answer(c)
+
+
+@endwbs
+
+@startwbs chopAndHam case
+*_ World
+**_ America 
+***_ Canada 
+***_ Mexico
+***_ USA
+**_ Europe
+***_  England
+***_  Germany
+***_  Spain
+@endwbs

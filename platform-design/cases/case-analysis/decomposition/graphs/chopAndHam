@@ -1,0 +1,44 @@
+digraph Tree {
+	node [shape=rectangle]
+	answer [label=answer]
+	subgraph cluster_a {
+		style=invisible
+		a [label="answer(a)"]
+		subgraph cluster_a1 {
+			style=invisible
+			a11 [label="eat(a, ham, yes)"]
+			a12 [label="eat(a, pork, tod)"]
+			a13 [label=p]
+			subgraph cluster_a13 {
+				style=invisible
+				a131 [label=p1]
+				subgraph cluster_a131 {
+					style=invisible
+					a1311 [label=today]
+					a1312 [label="if eat(a, ham, tod) then eat(b, pork, tod)"]
+				}
+				a132 [label=p2]
+				a133 [label=p3]
+			}
+		}
+	}
+	subgraph cluster_b {
+		style=invisible
+		b [label="answer(b)"]
+	}
+	subgraph cluster_c {
+		style=invisible
+		c [label="answer(c)"]
+	}
+	answer -> a
+	answer -> b
+	answer -> c
+	a -> a11
+	a -> a12
+	a -> a13
+	a13 -> a131
+	a131 -> a1311
+	a131 -> a1312
+	a13 -> a132
+	a13 -> a133
+}
