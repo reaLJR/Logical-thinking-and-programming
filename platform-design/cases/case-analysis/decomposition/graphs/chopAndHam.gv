@@ -1,0 +1,63 @@
+digraph Tree {
+	node [shape=rectangle]
+	answer [label=answer]
+	subgraph cluster_a {
+		style=invisible
+		a [label="answer(a)"]
+		subgraph cluster_a1 {
+			style=invisible
+			a11 [label="eat(a, ham, yes)"]
+			a12 [label="eat(a, pork, tod)"]
+		}
+	}
+	subgraph cluster_b {
+		style=invisible
+		b [label="answer(b)"]
+	}
+	subgraph cluster_c {
+		style=invisible
+		c [label="answer(c)"]
+	}
+	subgraph cluster_rules {
+		style=invisible
+		subgraph cluster_set1 {
+			style=invisible
+			set1 [label="结果集1"]
+			set1 -> c_ham_tod
+			set1 -> c_ham_yes
+			set1 -> a_pork_yes
+			set1 -> b_ham_yes
+			set1 -> a_pork_tod
+			set1 -> b_ham_tod
+		}
+		subgraph cluster_set2 {
+			style=invisible
+			set2 [label="结果集2"]
+			set2 -> b_pork_yes
+			set2 -> c_ham_tod
+			set2 -> c_ham_yes
+			set2 -> a_pork_yes
+			set2 -> a_pork_tod
+			set2 -> b_ham_tod
+		}
+		subgraph cluster_set3 {
+			style=invisible
+			set3 [label="结果集...."]
+		}
+	}
+	answer -> a
+	answer -> b
+	answer -> c
+	a -> a11
+	a -> a12
+	cluster_rules -> cluster_set1
+	cluster_rules -> cluster_set2
+	cluster_rules -> cluster_set3
+	c_ham_tod [label="eat(c,ham,tod)"]
+	c_ham_yes [label="eat(c,ham,yes)"]
+	a_pork_yes [label="eat(a,pork,yes)"]
+	b_ham_yes [label="eat(b,ham,yes)"]
+	a_pork_tod [label="eat(a,pork,tod)"]
+	b_ham_tod [label="eat(b,ham,tod)"]
+	b_pork_yes [label="eat(b,pork,yes)"]
+}

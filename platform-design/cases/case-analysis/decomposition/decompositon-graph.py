@@ -10,30 +10,6 @@ os.makedirs(graphs_dir, exist_ok=True)
 # 设置文件路径
 filename = os.path.join(graphs_dir, 'chopAndHam')
 
-# f = Digraph('finite_state_machine', filename=filename)
-# f.attr(rankdir='LR', size='20,5')
-# f.attr('node', shape='doublecircle')
-# f.node('LR_0')
-# f.node('LR_3')
-# f.node('LR_4')
-# f.node('LR_8')
-# f.attr('node', shape='circle')
-# f.edge('LR_0', 'LR_2', label='SS(B)')
-# f.edge('LR_0', 'LR_1', label='SS(S)')
-# f.edge('LR_1', 'LR_3', label='S($end)')
-# f.edge('LR_2', 'LR_6', label='SS(b)')
-# f.edge('LR_2', 'LR_5', label='SS(a)')
-# f.edge('LR_2', 'LR_4', label='S(A)')
-# f.edge('LR_5', 'LR_7', label='S(b)')
-# f.edge('LR_5', 'LR_5', label='S(a)')
-# f.edge('LR_6', 'LR_6', label='S(b)')
-# f.edge('LR_6', 'LR_5', label='S(a)')
-# f.edge('LR_7', 'LR_8', label='S(b)')
-# f.edge('LR_7', 'LR_5', label='S(a)')
-# f.edge('LR_8', 'LR_6', label='S(b)')
-# f.edge('LR_8', 'LR_5', label='S(a)')
-# f.view()
-
 g = Digraph('Tree', filename=filename, node_attr={'shape': 'rectangle'})
 
 g.node('answer', 'answer')
@@ -75,6 +51,69 @@ g.edges([
     ('a13', 'a132'), ('a13', 'a133')
 ])
 
+g.render()
 
-# g.view()
+
+filename = os.path.join(graphs_dir, 'chopAndHam.gv')
+
+g = Digraph('Tree', filename=filename, node_attr={'shape': 'rectangle'})
+
+g.node('answer', 'answer')
+
+# 创建 answer(a) 分支
+with g.subgraph(name='cluster_a') as a:
+    a.attr(style='invisible')
+    a.node('a', 'answer(a)')
+    with a.subgraph(name='cluster_a1') as a1:
+        a1.attr(style='invisible')
+        a1.node('a11', 'eat(a, ham, yes)')
+        a1.node('a12', 'eat(a, pork, tod)')
+
+# 创建 answer(b) 分支
+with g.subgraph(name='cluster_b') as b:
+    b.attr(style='invisible')
+    b.node('b', 'answer(b)')
+
+# 创建 answer(c) 分支
+with g.subgraph(name='cluster_c') as c:
+    c.attr(style='invisible')
+    c.node('c', 'answer(c)')
+
+# 创建 规则 分支
+with g.subgraph(name='cluster_rules') as rules:
+    rules.attr(style='invisible')
+    with rules.subgraph(name='cluster_set1') as set1:
+        set1.attr(style='invisible')
+        set1.node('set1', '结果集1')
+        set1.edges([
+            ('set1', 'c_ham_tod'), ('set1', 'c_ham_yes'), ('set1', 'a_pork_yes'),
+            ('set1', 'b_ham_yes'), ('set1', 'a_pork_tod'), ('set1', 'b_ham_tod')
+        ])
+    with rules.subgraph(name='cluster_set2') as set2:
+        set2.attr(style='invisible')
+        set2.node('set2', '结果集2')
+        set2.edges([
+            ('set2', 'b_pork_yes'), ('set2', 'c_ham_tod'), ('set2', 'c_ham_yes'),
+            ('set2', 'a_pork_yes'), ('set2', 'a_pork_tod'), ('set2', 'b_ham_tod')
+        ])
+    with rules.subgraph(name='cluster_set3') as set3:
+        set3.attr(style='invisible')
+        set3.node('set3', '结果集....')
+
+# 连接节点
+g.edges([
+    ('answer', 'a'), ('answer', 'b'), ('answer', 'c'),
+    ('a', 'a11'), ('a', 'a12'),
+    ('cluster_rules', 'cluster_set1'), ('cluster_rules', 'cluster_set2'), ('cluster_rules', 'cluster_set3')
+])
+
+# 设置节点名称
+g.node('c_ham_tod', 'eat(c,ham,tod)')
+g.node('c_ham_yes', 'eat(c,ham,yes)')
+g.node('a_pork_yes', 'eat(a,pork,yes)')
+g.node('b_ham_yes', 'eat(b,ham,yes)')
+g.node('a_pork_tod', 'eat(a,pork,tod)')
+g.node('b_ham_tod', 'eat(b,ham,tod)')
+g.node('b_pork_yes', 'eat(b,pork,yes)')
+
 g.render()
