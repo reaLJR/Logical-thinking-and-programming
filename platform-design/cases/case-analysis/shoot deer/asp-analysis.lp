@@ -6,19 +6,19 @@ person(zhao).
 person(q).
 
 % RIGHT
-% p(z) :- shoot(z), not shoot(l).
-% p(z) :- not shoot(z), shoot(l).
-% p(w) :- not shoot(q).
-% p(l) :- shoot(zhao).
-% p(l) :- not shoot(zhao), shoot(w).
-% p(zhao) :- not shoot(zhao), not shoot(w).
-% p(q) :- not shoot(l), not shoot(z).
+p(z) :- shoot(z), not shoot(l).
+p(z) :- not shoot(z), shoot(l).
+p(w) :- not shoot(q).
+p(l) :- shoot(zhao).
+p(l) :- not shoot(zhao), shoot(w).
+p(zhao) :- not shoot(zhao), not shoot(w).
+p(q) :- not shoot(l), not shoot(z).
 
-% 1{shoot(X) : person(X)}1.
-% 2{p(X) : person(X)}2.
+1{shoot(X) : person(X)}1.
+2{p(X) : person(X)}2.
 
-% #show p/1.
-% #show shoot/1.
+#show p/1.
+#show shoot/1.
 
 % -------------------------------------------------------------
 
@@ -277,64 +277,64 @@ person(q).
 % -------------------------------------------------------------
 
 
-rule(eitherOr).
-rule(neitherNor).
-rule(ifThen).
-rule(not_).
-rule(bothAnd).
-rule(nStatementsTrue).
-rule(allStatementsTrue).
-rule(noStatementTrue).
+% rule(eitherOr).
+% rule(neitherNor).
+% rule(ifThen).
+% rule(not_).
+% rule(bothAnd).
+% rule(nStatementsTrue).
+% rule(allStatementsTrue).
+% rule(noStatementTrue).
 
-reason(X, Y, eitherOr) :-     p(X), not p(Y), X!=Y, r(X), r(Y).
-reason(X, Y, eitherOr) :- not p(X),     p(Y), X!=Y, r(X), r(Y).
+% reason(X, Y, eitherOr) :-     p(X), not p(Y), X!=Y, r(X), r(Y).
+% reason(X, Y, eitherOr) :- not p(X),     p(Y), X!=Y, r(X), r(Y).
 
-reason(X, Y, ifThen)   :-     p(X),     p(Y), X!=Y, r(X), r(Y).
-reason(X, Y, ifThen)   :- not p(X),           X!=Y, r(X), r(Y).
+% reason(X, Y, ifThen)   :-     p(X),     p(Y), X!=Y, r(X), r(Y).
+% reason(X, Y, ifThen)   :- not p(X),           X!=Y, r(X), r(Y).
 
-reason(X, Y, bothAnd)  :-     p(X),     p(Y), X!=Y, r(X), r(Y).
+% reason(X, Y, bothAnd)  :-     p(X),     p(Y), X!=Y, r(X), r(Y).
 
-% reason(N, nStatementsTrue) :- N{p(X) : person(X)}N, N=2.
+% % reason(N, nStatementsTrue) :- N{p(X) : person(X)}N, N=2.
 
-% reason(N, nStatementsTrue) :- N{p(X) }N, person(X), N=2.
+% % reason(N, nStatementsTrue) :- N{p(X) }N, person(X), N=2.
 
-% father(X) :- person(X).
-r(X) :- person(X).
-r(1..8).
-r(shootz;shootl;shootw;shootq;shootzhao).
+% % father(X) :- person(X).
+% r(X) :- person(X).
+% r(1..8).
+% r(shootz;shootl;shootw;shootq;shootzhao).
 
-% 1{shoot(X) : person(X)}1.
-1{p(shootz);p(shootl);p(shootw);p(shootq);p(shootzhao)}1.
+% % 1{shoot(X) : person(X)}1.
+% 1{p(shootz);p(shootl);p(shootw);p(shootq);p(shootzhao)}1.
 
-% p(king) :- reason(2,nStatementsTrue).
-p(king) :- 2{p(z);p(w);p(l);p(zhao);p(q)}2.
+% % p(king) :- reason(2,nStatementsTrue).
+% p(king) :- 2{p(z);p(w);p(l);p(zhao);p(q)}2.
 
-p(z) :- reason(1, 2, eitherOr).
-p(1) :- p(shootz).
-p(2) :- p(shootl).
+% p(z) :- reason(1, 2, eitherOr).
+% p(1) :- p(shootz).
+% p(2) :- p(shootl).
 
-p(w) :- not p(shootq).
+% p(w) :- not p(shootq).
 
-p(l) :- reason(3, 4, ifThen).
-p(3) :- not p(shootzhao).
-p(4) :- p(shootw).
+% p(l) :- reason(3, 4, ifThen).
+% p(3) :- not p(shootzhao).
+% p(4) :- p(shootw).
 
-p(zhao) :- reason(5, 6, bothAnd).
-p(5) :- not p(shootzhao).
-p(6) :- not p(shootw).
+% p(zhao) :- reason(5, 6, bothAnd).
+% p(5) :- not p(shootzhao).
+% p(6) :- not p(shootw).
 
-p(q) :- reason(7, 8, bothAnd).
-p(7) :- not p(shootl).
-p(8) :- not p(shootz).
+% p(q) :- reason(7, 8, bothAnd).
+% p(7) :- not p(shootl).
+% p(8) :- not p(shootz).
 
-% 2{p(X) : person(X)}2.
+% % 2{p(X) : person(X)}2.
 
-answer(X) :- p(X), person(X).
+% answer(X) :- p(X), person(X).
 
-:- not p(king).
+% :- not p(king).
 
-#show answer/1.
-#show p/1.
-% #show shoot/1.
-% #show true.
-% #show reason/3.
+% #show answer/1.
+% #show p/1.
+% % #show shoot/1.
+% % #show true.
+% % #show reason/3.

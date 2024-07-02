@@ -1,0 +1,44 @@
+digraph Tree {
+	node [shape=rectangle]
+	root [label=root]
+	subgraph cluster_a {
+		style=invisible
+		a [label="root(a)"]
+		subgraph cluster_a1 {
+			style=invisible
+			a11 [label=node_a11]
+			a12 [label=node_a12]
+			a13 [label=node_a13]
+			subgraph cluster_a13 {
+				style=invisible
+				a131 [label=node_a131]
+				subgraph cluster_a131 {
+					style=invisible
+					a1311 [label=node_a1311]
+					a1312 [label=node_a1312]
+				}
+				a132 [label=node_a132]
+				a133 [label=node_a133]
+			}
+		}
+	}
+	subgraph cluster_b {
+		style=invisible
+		b [label="root(b)"]
+	}
+	subgraph cluster_c {
+		style=invisible
+		c [label="root(c)"]
+	}
+	root -> a
+	root -> b
+	root -> c
+	a -> a11
+	a -> a12
+	a -> a13
+	a13 -> a131
+	a131 -> a1311
+	a131 -> a1312
+	a13 -> a132
+	a13 -> a133
+}

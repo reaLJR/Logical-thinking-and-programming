@@ -1,0 +1,249 @@
+' @startwbs chopAndHam
+' ' <style>
+' ' wbsDiagram {
+' '   .notations {
+' '     '   SequenceBoxBorderColor white
+' '     '   BoxPadding 1
+' '       BackgroundColor clear
+' '       LineThickness 0
+' '   }
+' ' }
+' ' </style>
+
+' + answer
+' ++ answer(a)
+' +++ 假设
+' ++++ eat(a, ham, yes)
+' ++++ eat(a, pork, tod)
+' +++ 规则
+' ++++ p1
+' +++++ today
+' ++++++ if eat(a, ham, tod) then eat(b, pork, tod)
+' +++++ yesterday
+' ++++++ ...
+' ++++ p2
+' ++++ p3
+' ++ answer(b)
+' ++ answer(c)
+
+
+' @endwbs
+
+
+' @startwbs chopAndHam multi answer sets
+' + answer
+' ++ answer(a)
+' +++ 假设
+' ++++ eat(a, ham, yes)
+' ++++ eat(a, pork, tod)
+' +++ 规则
+' ++++ 结果集1
+' +++++ eat(c,ham,tod) eat(c,ham,yes) eat(a,pork,yes) eat(b,ham,yes) eat(a,pork,tod) eat(b,ham,tod)
+' ++++ 结果集2
+' +++++ eat(b,pork,yes) eat(c,ham,tod) eat(c,ham,yes) eat(a,pork,yes) eat(a,pork,tod) eat(b,ham,tod)
+' ++++ 结果集....
+' ++ answer(b)
+' ++ answer(c)
+
+' @endwbs
+
+' @startwbs chopAndHam hypothesis and rules
+' + answer
+' ++ 假设
+' +++ answer(a)
+' ++++ eat(a, ham, yes)
+' ++++ eat(a, pork, tod)
+' +++ answer(b)
+' +++ answer(c)
+' ++ 规则
+' +++ 结果集1
+' ++++ eat(c,ham,tod) eat(c,ham,yes) eat(a,pork,yes) eat(b,ham,yes) eat(a,pork,tod) eat(b,ham,tod)
+' +++ 结果集2
+' ++++ eat(b,pork,yes) eat(c,ham,tod) eat(c,ham,yes) eat(a,pork,yes) eat(a,pork,tod) eat(b,ham,tod)
+' +++ 结果集....
+
+' @endwbs
+
+@startwbs goal and rules
++ answer
+++ 求解目标
++++ 目标1
++++ 目标2
++++ 目标...
+++: 规则
+p1 p2 p3 p....;
++++ 规则成立情况1
++++ 规则成立情况2
++++ 规则成立情况....
+@endwbs
+
+@startwbs chopAndHam goal and rules
++ answer
+++ 求解目标
++++: 谁昨天要的是火腿，今天要的是猪排 
+eat(X, ham, yes) eat(X, pork, tod);
+++++ a
+++++ b
+++++ c
+++: 规则
+p1 p2 p3;
++++ 规则成立条件1
+++++:eat(c,ham,tod) eat(c,ham,yes) eat(a,pork,yes) 
+eat(b,ham,yes) eat(a,pork,tod) eat(b,ham,tod);
++++ 规则成立条件2
+++++:<back:Yellow>eat(b,pork,tod)</back> eat(c,ham,yes) eat(c,ham,tod) 
+eat(a,pork,yes) <back:Yellow>eat(b,ham,yes)</back> eat(a,pork,tod);
++++ 规则成立条件....
+@endwbs
+
+@startwbs shoot goal and rules
++ answer
+++ 求解目标
++++: 谁射中了鹿 
+shoot(X);
+++++ z
+++++ <back:PaleGreen>q
+++++ .....
+++ 规则(分解为各种条件的成立情况)
++++:<back:pink>若p1正确,鹿是张将军或李将军射中的。
+' ++++ p5错误,其与p1相互否定。
+' ++++ p3错误,其与p1相互否定。
+' ++++ p4正确,其符合p1。
+' ++++ p2正确,其符合p1。
+<back:pink>p5错误,其与p1相互否定。
+<back:pink>p3错误,其与p1相互否定。
+<back:pink>p4正确,其符合p1。
+<back:pink>p2正确,其符合p1。
+<back:pink>不符合只有两个命题为真;
+' +++ 根据知识"只有两个命题为真。",此次推论不成立,即p1正确不成立。
++++:若p1错误,鹿不是张将军或李将军射中的。
+p5正确,其与p1相互否定。;
+++++:<back:pink>若p3正确,如果不是赵将军射中的,那么一定是王将军射中的。
+' +++++ p4错误,其与p3相互否定。
+' +++++ p2正确,其符合p3。
+<back:pink>p4错误,其与p3相互否定。
+<back:pink>p2正确,其符合p3。
+<back:pink>不符合只有两个命题为真;
+' ++++ 根据知识"只有两个命题为真。",此次推论不成立,即p3正确不成立。
+++++:若p3不正确,既不是赵将军射中的,也不是王将军射中的。
+' +++++ p4正确,其与p3相互否定。
+' +++++ 若p2正确,鹿不是钱将军射中的。
+p4正确,其与p3相互否定。;
++++++:<back:pink>若p2正确,鹿不是钱将军射中的。
+<back:pink>不符合只有两个命题为真;
+' ++++++ 根据知识"只有两个命题为真。",此次推论不成立,即p2正确不成立。
++++++:<back:PaleGreen>若p2错误,鹿是钱将军射中的。
+<back:PaleGreen>符合只有两个命题为真
+<back:PaleGreen>即 shoot(q);
+' ++++++ 符合条件,因此结果为鹿是钱将军射中的。此时,p4、p5正确,p1、p2、p3错误。
+
+' +++ 规则成立条件
+' ++++ shoot(q)
+@endwbs
+
+@startwbs whoPassed goal and rules
+' 甲、乙、丙、丁4人参加预选赛。对于预选赛结果,几位教练预测如下:
+' (1)如果甲、乙均未通过，则丙通过
+' (2)如果乙、丙至少有1人通过，则丁也通过
+' (3)如果甲、乙至少有1人通过，则丙也通过，但是丁不通过。
+' 根据几位教练的预测，可以推出:
+' A．丙和丁通过
+' B．甲和丁通过
+' C.甲和乙通过
+' D．乙和丙通过
+
++ answer
+++ 求解目标
++++ 正确选项 
+++++ <back:PaleGreen>pass(c), pass(d).
+++++ pass(a), pass(d).
+++++ pass(a), pass(b).
+++++ pass(b), pass(c).
+++: 规则
+p1 p2 p3;
++++ 规则成立条件
+++++ pass(c) pass(d)
+@endwbs
+
+@startwbs whoJoin goal and rules
+' 某医院刘佳、郑毅、郭斌、丁晓、吴芳、施文6位医生拟报名参加“一心向党，健康为民”进社区义诊活动，已知下列情况为真：
+' （1）要么刘佳参加，要么郑毅参加；
+' （2）只有吴芳参加，刘佳才参加；x1 * (1-x2)=0
+' （3）如果郭斌和吴芳都参加，那么施文也会参加；x3 = x1*x2
+' （4）或者丁晓不参加，或者郭斌参加；
+' （5）施文、丁晓至少有1人参加。
+'  
+' 现施文确定无法参加，那么6位医生中最后参加义诊活动的是：
+' A.刘佳、郭斌、丁晓
+' B.郑毅、郭斌、丁晓
+' C.郑毅、丁晓、吴芳
+' D.刘佳、丁晓、吴芳
+
++ answer
+++ 求解目标
++++ 正确选项 
+++++ p(liujia),p(guobin),p(dingxiao).
+++++ <back:PaleGreen>p(zhengyi),p(guobin),p(dingxiao).
+++++ p(zhengyi),p(dingxiao),p(wufang).
+++++ p(liujia),p(dingxiao),p(wufang).
+++: 规则
+p1-6;
++++ 规则成立条件
+++++:p(zhengyi) 
+p(dingxiao) 
+p(guobin);
+@endwbs
+
+
+@startwbs identity goal and rules
+' 甲、乙、丙、丁4人，一人是教师，一人是医生，一人是作家，一人是律师。现已知:
+' ①甲的年龄比教师大； x1 > ??    4> 
+' ②乙和律师的籍贯不同；
+' ③丙与作家的籍贯相同；
+' ④作家的年龄比乙小；
+' ⑤甲与律师来自相同的城市；
+' ⑥教师的籍贯与乙相同。
+' x1,x2,x3,x4 -年龄
+' y1,y2,y3,y4 -籍贯
+' 根据以上的信息，以下说法不正确的是:
+' A.作家的年龄比教师大
+' B.医生与律师的籍贯相同
+' C.医生的年龄比作家大
+' D.律师与教师的籍贯不同
+
+
+' Answer: 1
+' younger(a,b) elder(b,a) -elder(a,b) -younger(b,a) identity_match(a,writer) elder(a,c) identity_match(c,teacher) same_hometown(b,c) same_hometown(c,a) different_hometown(b,d) identity_match(d,lawyer) identity_match(b,doctor) -younger(a,c) younger(c,a) -elder(c,a) -different_hometown(c,a) -different_hometown(b,c) -same_hometown(b,d)
+' Answer: 2
+' younger(a,b) elder(b,a) -elder(a,b) -younger(b,a) identity_match(a,writer) elder(a,d) identity_match(d,teacher) same_hometown(b,d) same_hometown(c,a) different_hometown(b,c) identity_match(c,lawyer) identity_match(b,doctor) -younger(a,d) younger(d,a) -elder(d,a) -different_hometown(c,a) -different_hometown(b,d) -same_hometown(b,c)
+
++ answer
+++ 求解目标
++++ 正确选项 
+++++ 作家的年龄比教师大 √
+++++ 医生与律师的籍贯相同 ×
+++++ 医生的年龄比作家大 √
+++++ 律师与教师的籍贯不同 ？
+++: 规则
+p1-5;
++++ 规则成立条件
+++++: identity_match(a,writer) <back:orange>identity_match(c,teacher)</back> <back:orange>identity_match(d,lawyer)</back> identity_match(b,doctor)
+----
+ younger(a,b) elder(b,a) elder(a,c) younger(c,a)
+ unknown_age(d,a) unknown_age(c,b) unknown_age(d,b) unknown_age(b,c) 
+ unknown_age(d,c) unknown_age(a,d) unknown_age(b,d) unknown_age(c,d)
+----
+ same_hometown(b,c) same_hometown(c,a) different_hometown(b,d)
+ unknown_hometown(d,a) unknown_hometown(a,b) unknown_hometown(d,b) 
+ unknown_hometown(d,c) unknown_hometown(a,d) unknown_hometown(b,a) ......;
+
+++++: identity_match(a,writer) <back:orange>identity_match(d,teacher)</back> <back:orange>identity_match(c,lawyer)</back> identity_match(b,doctor)
+----
+younger(a,b) elder(b,a) elder(a,d) younger(d,a)
+unknown_age(c,a) unknown_age(c,b) unknown_age(d,b) unknown_age(a,c) 
+unknown_age(b,c) unknown_age(d,c) unknown_age(b,d) unknown_age(c,d)
+----
+same_hometown(b,d) same_hometown(c,a) different_hometown(b,c)
+unknown_hometown(d,a) .....;
+
+@endwbs

@@ -1,0 +1,33 @@
+digraph Tree {
+	node [shape=rectangle]
+	answer [label=answer]
+	subgraph cluster_a {
+		style=invisible
+		a [label="answer(a)"]
+		"eat(a, ham, yes)" [label="eat(a, ham, yes)"]
+		"eat(a, pork, tod)" [label="eat(a, pork, tod)"]
+	}
+	subgraph cluster_b {
+		style=invisible
+		b [label="answer(b)"]
+	}
+	subgraph cluster_c {
+		style=invisible
+		c [label="answer(c)"]
+	}
+	subgraph cluster_results1 {
+		style=invisible
+		"eat(c,ham,tod) eat(c,ham,yes) eat(a,pork,yes) eat(b,ham,yes) eat(a,pork,tod) eat(b,ham,tod)" [label="eat(c,ham,tod) eat(c,ham,yes) eat(a,pork,yes) eat(b,ham,yes) eat(a,pork,tod) eat(b,ham,tod)"]
+	}
+	subgraph cluster_results2 {
+		style=invisible
+		"eat(b,pork,yes) eat(c,ham,tod) eat(c,ham,yes) eat(a,pork,yes) eat(a,pork,tod) eat(b,ham,tod)" [label="eat(b,pork,yes) eat(c,ham,tod) eat(c,ham,yes) eat(a,pork,yes) eat(a,pork,tod) eat(b,ham,tod)"]
+	}
+	answer -> a
+	answer -> b
+	answer -> c
+	a -> "eat(a, ham, yes)"
+	a -> "eat(a, pork, tod)"
+	cluster_results1 -> "eat(c,ham,tod) eat(c,ham,yes) eat(a,pork,yes) eat(b,ham,yes) eat(a,pork,tod) eat(b,ham,tod)"
+	cluster_results2 -> "eat(b,pork,yes) eat(c,ham,tod) eat(c,ham,yes) eat(a,pork,yes) eat(a,pork,tod) eat(b,ham,tod)"
+}
