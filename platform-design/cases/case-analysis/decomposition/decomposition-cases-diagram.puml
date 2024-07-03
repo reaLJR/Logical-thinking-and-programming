@@ -181,17 +181,22 @@ p1 p2 p3;
 
 + answer
 ++ 求解目标
-+++ 正确选项 
-++++ p(liujia),p(guobin),p(dingxiao).
++++ <back:PaleGreen>-join(shiwen)
+++++ join(liujia),join(guobin),join(dingxiao).
 ++++ <back:PaleGreen>p(zhengyi),p(guobin),p(dingxiao).
-++++ p(zhengyi),p(dingxiao),p(wufang).
-++++ p(liujia),p(dingxiao),p(wufang).
+++++ join(zhengyi),join(dingxiao),join(wufang).
+++++ join(liujia),join(dingxiao),join(wufang).
 ++: 规则
 p1-6;
 +++ 规则成立条件
-++++:p(zhengyi) 
-p(dingxiao) 
-p(guobin);
+++++:-join(l) join(z) -join(g) 
+-join(d) -join(w) join(s);
+++++:-join(l) join(z) -join(g) 
+-join(d) join(w) join(s);
+++++:-join(l) join(z) join(g) 
+join(d) -join(w) <back:PaleGreen>-join(s);
+++++:join(l) -join(z) -join(g) 
+-join(d) join(w) join(s);
 @endwbs
 
 
