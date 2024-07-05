@@ -1,4 +1,5 @@
 person(l;z;g;d;w;s).
+-join(X) :- not join(X), person(X).
 
 answer.
 
@@ -27,7 +28,7 @@ not join(l) :- p(22).
 1{not join(d); join(g)}1 :- p(4).
 1{join(s;d)}1 :- p(5).
 
--join(X) :- not join(X), person(X).
 
-#show join/1.
-#show -join/1.
+% #show join/1.
+% #show -join/1.
+#show option/1.

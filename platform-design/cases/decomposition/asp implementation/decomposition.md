@@ -29,6 +29,8 @@ aa: if conclusion then rule  -->
 ```
 knowledge.
 
+common_sense.
+
 answer.
 
 2{options, rule}2 :- answer.
