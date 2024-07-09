@@ -13,6 +13,8 @@ different_hometown(P1, P2)  :- person(P1), person(P2), -same_hometown(P1, P2), P
 different_hometown(P1, P2)  :- person(P1), person(P2), different_hometown(P2, P1), P1 != P2.
 -same_hometown(P1, P2)      :- person(P1), person(P2), different_hometown(P1, P2), P1 != P2.
 -different_hometown(P1, P2) :- person(P1), person(P2), same_hometown(P1, P2), P1 != P2.
+% -same_hometown(P1, P2)      :- person(P1), person(P2), unknown_hometown(P1, P2), P1 != P2.
+% -different_hometown(P1, P2) :- person(P1), person(P2), unknown_hometown(P1, P2), P1 != P2.
 same_hometown(P1, P2)       :- person(P1), person(P2), person(P3), same_hometown(P1, P3), same_hometown(P2, P3), P1 != P2.
 same_hometown(P1, P2)       :- person(P1), person(P2), same_hometown(P2, P1), P1 != P2.
 unknown_hometown(P1, P2)    :- person(P1), person(P2), not same_hometown(P1, P2), not different_hometown(P1, P2), P1 != P2.
@@ -35,7 +37,41 @@ answer.
 
 2{options; rule}2 :- answer.
 
-0{option(1);option(2);option(3);option(4)}4 :- options.
+% 0{option(1);option(2);option(3);option(4)}4 :- options.
+% 1{percondition(X,P1,P2):person(P1),person(P2)}1 :- option(X).
+
+% -option(X) :- not option(X), X=1..4.
+% 1{-percondition(X,P1,P2):person(P1),person(P2)}1 :- -option(X).
+
+% 3{elder(P1, P2); identity_match(P1, writer); identity_match(P2, teacher)}3              :- percondition(1,P1,P2).
+% 3{same_hometown(P1, P2); identity_match(P1, doctor); identity_match(P2, lawyer)}3       :- percondition(2,P1,P2). 
+% 3{elder(P1, P2); identity_match(P1, doctor); identity_match(P2, writer)}3               :- percondition(3,P1,P2). 
+% 3{different_hometown(P1, P2); identity_match(P1, lawyer); identity_match(P2, teacher)}3 :- percondition(4,P1,P2). 
+% 3{elder(P1, P2); identity_match(P1, writer); identity_match(P2, teacher)}3 :- percondition(4,P1,P2). 
+
+% answer(a):- elder(P1, P2)               , identity_match(P1, writer), identity_match(P2, teacher)    , person(P1), person(P2).
+% answer(b):- same_hometown(P1, P2)       , identity_match(P1, doctor), identity_match(P2, lawyer)     , person(P1), person(P2). 
+% answer(c):- elder(P1, P2)               , identity_match(P1, doctor), identity_match(P2, writer)     , person(P1), person(P2). 
+% answer(d):- different_hometown(P1, P2)  , identity_match(P1, lawyer), identity_match(P2, teacher)    , person(P1), person(P2). 
+
+1{percondition(X,P1,P2):person(P1),person(P2)}1 :- option(X).
+
+-option(1) :- option(1).
+1{-percondition(1,P1,P2):person(P1),person(P2)}1 :- -option(1).
+
+3{elder(P1, P2); identity_match(P1, writer); identity_match(P2, teacher)}3 :- percondition(1,P1,P2).
+0{elder(P1, P2); identity_match(P1, writer); identity_match(P2, teacher)}2 :- -percondition(1,P1,P2).
+
+
+% answer(a):- 3{elder(P1, P2); identity_match(P1, writer); identity_match(P2, teacher)}3              , person(P1), person(P2).
+% answer(b):- 3{same_hometown(P1, P2); identity_match(P1, doctor); identity_match(P2, lawyer)}3       , person(P1), person(P2). 
+% answer(c):- 3{elder(P1, P2); identity_match(P1, doctor); identity_match(P2, writer)}3               , person(P1), person(P2). 
+% answer(d):- 3{different_hometown(P1, P2); identity_match(P1, lawyer); identity_match(P2, teacher)}3 , person(P1), person(P2). 
+
+% 0{elder(P1, P2); identity_match(P1, writer); identity_match(P2, teacher)}2              :- -percondition(1,P1,P2).
+% 0{same_hometown(P1, P2); identity_match(P1, doctor); identity_match(P2, lawyer)}2       :- -percondition(2,P1,P2). 
+% 0{elder(P1, P2); identity_match(P1, doctor); identity_match(P2, writer)}2               :- -percondition(3,P1,P2). 
+% 0{different_hometown(P1, P2); identity_match(P1, lawyer); identity_match(P2, teacher)}2 :- -percondition(4,P1,P2). 
 
 % THAT'S HORRIBLE
 % 5{elder(P1, P2); identity_match(P1, writer); identity_match(P2, teacher);person(P1);person(P2)}5 :- answer(a).
@@ -78,8 +114,10 @@ answer.
 % #show smaller/2.
 % #show -smaller/2.
 % #show unknown_age/2.
-#show option/1.
-
+% #show option/1.
+% #show percondition/3.
+% #show -option/1.
+#show answer/1.
 
 
 % original solution

@@ -217,6 +217,24 @@ answer(d) :- different_hometown(P1, P2), identity_match(P1, lawyer), identity_ma
 
 #show option/1.
 ```
+```
+elder(a,b) identity_match(b,teacher) **identity_match(a,writer) **
+elder(a,c) **identity_match(c,teacher) **
+elder(a,d) **identity_match(d,teacher) **
+elder(b,a) identity_match(a,teacher) identity_match(b,writer) 
+elder(b,c) 
+elder(b,d) 
+elder(c,a) identity_match(c,writer) 
+elder(c,b) 
+elder(c,d) 
+elder(d,a) identity_match(d,writer) 
+elder(d,b) 
+elder(d,c)
+
+RIGHT:identity_match(a,writer) identity_match(c,teacher) identity_match(b,doctor) identity_match(d,lawyer)
+
+RIGHT:identity_match(a,writer) identity_match(d,teacher) identity_match(b,doctor) identity_match(c,lawyer)
+```
 
 #### 约束满足法解答
 ```

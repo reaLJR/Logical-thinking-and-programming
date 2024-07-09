@@ -29,6 +29,6 @@ not join(l) :- p(22).
 1{join(s;d)}1 :- p(5).
 
 
-% #show join/1.
-% #show -join/1.
+#show join/1.
+#show -join/1.
 #show option/1.

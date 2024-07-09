@@ -1,0 +1,49 @@
+@startwbs comp frame
++ v_answer
+++ v_obj
++++ op1
+++++ r1
++++ op2
+++++ r2
+++ v_rule
++++ p1
+++++ r3
++++ p2
+++++ r4
++++++ r5
++++++ r6
+@endwbs
+
+@startmindmap comp frame mindmap
+*:v_answer
+----
+least_accepted_num=2
+most_accepted_num=2;
+**:v_obj
+----
+least_accepted_num=1
+most_accepted_num=2
+constrain=person;
+***:op1
+----
+precondition=person;
+**** r1
+***:op1
+----
+precondition=person;
+**** r2
+**:v_rule
+----
+least_accepted_num=1
+most_accepted_num=1;
+*** p1
+**** r3
+*** p2
+****:r4
+----
+least_accepted_num=1
+most_accepted_num=1;
+***** r5
+***** r6
+@endmindmap
+
