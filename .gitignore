@@ -1,0 +1,5 @@
+# 忽略特定目录下的所有 PDF 文件
+platform-design/cases/case-materials/*.pdf
+
+# 忽略特定目录下的所有 CSV 文件
+reference-materials/ASP generating/LLASP-D86C/data/*.csv

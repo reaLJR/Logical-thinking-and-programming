@@ -49,18 +49,18 @@ answer.
 % 3{different_hometown(P1, P2); identity_match(P1, lawyer); identity_match(P2, teacher)}3 :- percondition(4,P1,P2). 
 % 3{elder(P1, P2); identity_match(P1, writer); identity_match(P2, teacher)}3 :- percondition(4,P1,P2). 
 
-% answer(a):- elder(P1, P2)               , identity_match(P1, writer), identity_match(P2, teacher)    , person(P1), person(P2).
-% answer(b):- same_hometown(P1, P2)       , identity_match(P1, doctor), identity_match(P2, lawyer)     , person(P1), person(P2). 
-% answer(c):- elder(P1, P2)               , identity_match(P1, doctor), identity_match(P2, writer)     , person(P1), person(P2). 
-% answer(d):- different_hometown(P1, P2)  , identity_match(P1, lawyer), identity_match(P2, teacher)    , person(P1), person(P2). 
+answer(a):- elder(P1, P2)               , identity_match(P1, writer), identity_match(P2, teacher)    , person(P1), person(P2).
+answer(b):- same_hometown(P1, P2)       , identity_match(P1, doctor), identity_match(P2, lawyer)     , person(P1), person(P2). 
+answer(c):- elder(P1, P2)               , identity_match(P1, doctor), identity_match(P2, writer)     , person(P1), person(P2). 
+answer(d):- different_hometown(P1, P2)  , identity_match(P1, lawyer), identity_match(P2, teacher)    , person(P1), person(P2). 
 
-1{percondition(X,P1,P2):person(P1),person(P2)}1 :- option(X).
+% 1{percondition(X,P1,P2):person(P1),person(P2)}1 :- option(X).
 
--option(1) :- option(1).
-1{-percondition(1,P1,P2):person(P1),person(P2)}1 :- -option(1).
+% -option(1) :- option(1).
+% 1{-percondition(1,P1,P2):person(P1),person(P2)}1 :- -option(1).
 
-3{elder(P1, P2); identity_match(P1, writer); identity_match(P2, teacher)}3 :- percondition(1,P1,P2).
-0{elder(P1, P2); identity_match(P1, writer); identity_match(P2, teacher)}2 :- -percondition(1,P1,P2).
+% 3{elder(P1, P2); identity_match(P1, writer); identity_match(P2, teacher)}3 :- percondition(1,P1,P2).
+% 0{elder(P1, P2); identity_match(P1, writer); identity_match(P2, teacher)}2 :- -percondition(1,P1,P2).
 
 
 % answer(a):- 3{elder(P1, P2); identity_match(P1, writer); identity_match(P2, teacher)}3              , person(P1), person(P2).
